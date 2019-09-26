@@ -1,0 +1,58 @@
+<html>
+Please check console logs.
+<script type="text/javascript">
+	function startEvent(id, listener){
+		const prefix = " ".repeat(id);
+		let n = 0;
+		let t = setInterval(()=>{
+			const num = n;
+			if(n>=10){
+				clearInterval(t);
+				return;
+			}
+			n++;
+			listener(()=>{
+				return new Promise((resolve, reject)=>{
+					console.log(prefix+"ID:",id,"/",num, "Start");
+					setTimeout(()=>{
+						console.log(prefix+"ID:",id,"/",num, "Finish");
+						resolve();
+					},Math.floor(Math.random(1)*5));
+				});
+			});
+		},Math.floor(Math.random(1)*5)+5)
+	}
+
+	const queues = [[],[],[]];
+	for(let i=0; i<3; i++){
+		const id = i;
+		startEvent(id, (f)=>{
+			queues[id].push(f);
+			tryExec();
+		})
+	}
+	
+	var curId=0;
+	var onProgress=false;
+
+function tryExec(){
+	if(onProgress){
+		return;
+	}
+	if(queues[curId].length==0){
+		return;
+	}
+	const f = queues[curId].shift();
+	onProgress=true;
+	curId++;
+	if(curId>=3){
+		curId=0;
+	}
+	f().then(()=>{
+		onProgress=false;
+		tryExec();
+	});
+}
+
+</script>
+</html>
