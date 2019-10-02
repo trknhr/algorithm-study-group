@@ -1,43 +1,48 @@
-type Data = {
+type VNode = {
     content: string
-    children: Data[]
+    children: VNode[]
 }
 
 type Tree = {
-    children: Data[]
+    children: VNode[]
 }
 
-const node: Data = {
-    content: 'aaa',
-    children: [],
+type Patch = {
+    type: 'delete' | 'create' | 'update'
+    index: number
+    content?: string
 }
 
 const root: Tree = {
     children: [
         {
-            content: '0',
+            content: 'aaa',
             children: [
                 {
-                    content: '0-0',
+                    content: 'aaa-0',
                     children: [],
                 },
             ],
         },
         ,
         {
-            content: '1',
+            content: 'bbb',
             children: [
                 {
-                    content: '1-0',
+                    content: 'bbb-0',
                     children: [],
                 },
             ],
         },
         {
-            content: '2',
+            content: 'ccc',
             children: [
                 {
-                    content: '2-0',
+                    content: 'ccc-0',
+                    children: [],
+                },
+                {
+                    content: 'ccc-1',
                     children: [],
                 },
             ],
@@ -48,29 +53,34 @@ const root: Tree = {
 const update: Tree = {
     children: [
         {
-            content: '0',
+            content: 'aaa',
             children: [
                 {
-                    content: '0-0',
+                    content: 'aaa-a',
                     children: [],
                 },
             ],
         },
         ,
         {
-            content: '1',
+            content: 'bb',
             children: [
                 {
-                    content: '1-0',
+                    content: 'bbb-0',
                     children: [],
                 },
             ],
         },
         {
-            content: '2',
-            children: [],
+            content: 'ccc',
+            children: [
+                {
+                    content: 'ccc-0',
+                    children: [],
+                },
+            ],
         },
     ],
 }
 
-function diff(tree1: Tree, tree2: Tree) {}
+function diff(tree1: Tree, tree2: Tree): Patch[] {}
