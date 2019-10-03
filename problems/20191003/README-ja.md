@@ -7,6 +7,7 @@
 type VNode = {
     content: string
     children: VNode[]
+    index: number
 }
 
 // 差分
@@ -97,9 +98,9 @@ const after: VNode = {
 こういう差分データを返す関数を作成する。
 
 ```
-{
-    2: { type: 'update', node: { content: '2_update', children: [] } },
-    4: { type: 'create', node: { content: '4_craete', children: [] } },
-    7: { type: 'delete' }
-}
+[
+    { type: 'update', index: 2, node: { content: '2_update', children: [] } },
+    { type: 'create', index: 3, node: { content: '4_craete', children: [] } },
+    { type: 'delete', index: 7 }
+]
 ```

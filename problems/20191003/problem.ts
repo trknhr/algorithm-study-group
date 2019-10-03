@@ -5,6 +5,7 @@ type VNode = {
 
 type Patch = {
     type: 'delete' | 'create' | 'update'
+    index: number
     node?: VNode
 }
 
@@ -102,9 +103,10 @@ function compare(
         const i = map.get(from)
         const p: Patch = {
             type: 'update',
+            index: i,
             node: to,
         }
-        patches[i] = p
+        patches.push(p)
     }
     const len =
         from.children.length > to.children.length
@@ -112,17 +114,17 @@ function compare(
             : to.children.length
     for (let i = 0; i < len; i++) {
         if (!from.children[i]) {
-            const last = from.children[from.children.length - 1]
-            const idx = map.get(last)
-            patches[idx] = {
+            patches.push({
                 type: 'create',
+                index: map.get(from),
                 node: to.children[i],
-            }
+            })
         } else if (!to.children[i]) {
             const idx = map.get(from.children[i])
-            patches[idx] = {
+            patches.push({
                 type: 'delete',
-            }
+                index: idx,
+            })
         } else {
             compare(from.children[i], to.children[i], map, patches)
         }
