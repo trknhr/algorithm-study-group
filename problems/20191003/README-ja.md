@@ -13,6 +13,7 @@ type VNode = {
 // 差分
 type Patch = {
     type: 'delete' | 'create' | 'update'
+    index: number
     node?: VNode
 }
 ```
