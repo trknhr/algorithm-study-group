@@ -13,12 +13,14 @@ type VNode = {
 // 差分
 type Patch = {
     type: 'delete' | 'create' | 'update'
-    index: number
+    index: number // 'delete'と'update'の場合そのノードのindex、'create'の場合は親のノードのindex
     node?: VNode
 }
 ```
 
-`before`と`after`を比較する。
+index は root のノードを 0 番目として深さ優先で番号。
+
+`before`と`after`を比較して差分の配列を返す関数を作成する。
 
 ```
 const before: VNode = {
