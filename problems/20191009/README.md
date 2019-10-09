@@ -6,7 +6,7 @@ You cannot use division in this problem.
 
 Here's a start:
 
-def calc(nums):
+function calc(nums):
   # Fill this in.
 
 console.log(calc([1, 2, 3, 4, 5]))
