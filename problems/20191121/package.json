@@ -1,0 +1,15 @@
+{
+    "name": "20191121",
+    "version": "1.0.0",
+    "description": "",
+    "main": "answer.js",
+    "scripts": {
+        "start": "npx ts-node ./answer.ts"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "ts-node": "^8.5.2",
+        "typescript": "^3.7.2"
+    }
+}
