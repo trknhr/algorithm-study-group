@@ -30,4 +30,21 @@ function findMaxArray(arr, k) {
     return max
 }
 
-findMaxArray([2, 1, 5, 1, 3, 2], 3)
+console.log(findMaxArray([2, 1, 5, 1, 3, 2], 3))
+
+function test() {
+    const arr = [];
+    const length = Math.floor(Math.random() * 15)+2;
+    for (let i = 0; i < length; i++) {
+        arr.push(Math.floor(Math.random() * 9) + 1);
+    }
+    const k = Math.floor(Math.random() * (length-2))+2;
+    console.log("----")
+    console.log("array = ", arr, ", K = ", k)
+    console.log("answer:", findMaxArray(arr, k))
+}
+
+test();
+test();
+test();
+test();
